@@ -31,13 +31,13 @@ class WebViewXController extends ChangeNotifier
     required String initialContent,
     required SourceType initialSourceType,
     required bool ignoreAllGestures,
-  })  : _ignoreAllGesturesNotifier = ValueNotifier(ignoreAllGestures),
-        _history = HistoryStack<WebViewContent>(
-          initialEntry: WebViewContent(
-            source: initialContent,
-            sourceType: initialSourceType,
-          ),
-        );
+  }) : _ignoreAllGesturesNotifier = ValueNotifier(ignoreAllGestures),
+       _history = HistoryStack<WebViewContent>(
+         initialEntry: WebViewContent(
+           source: initialContent,
+           sourceType: initialSourceType,
+         ),
+       );
 
   /// Boolean getter which reveals if the gestures are ignored right now
   @override
@@ -124,10 +124,7 @@ class WebViewXController extends ChangeNotifier
   /// print(resultFromJs); // prints "This is a test"
   /// ```
   @override
-  Future<dynamic> callJsMethod(
-    String name,
-    List<dynamic> params,
-  ) {
+  Future<dynamic> callJsMethod(String name, List<dynamic> params) {
     final result = connector.callMethod(name.toJS, params.toJSBox);
     return Future<dynamic>.value(result);
   }
@@ -146,7 +143,7 @@ class WebViewXController extends ChangeNotifier
   }) {
     final result = (inGlobalContext ? js.globalContext : connector).callMethod(
       'eval'.toJS,
-      [rawJavascript].toJSBox,
+      rawJavascript.toJSBox,
     );
     return Future<dynamic>.value(result);
   }
